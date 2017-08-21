@@ -20,13 +20,13 @@ public class Panel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected static ArrayList<Shape> shapes = new ArrayList<>();
+	private static ArrayList<Shape> shapes = new ArrayList<>();
 	private UserEntityManager uem;
 	private Point start, end;
 	private Shape shape = null;
 
 	Panel(User user) throws SQLException {
-		setBounds(10, 11, 500, 500);
+		setBounds(10, 10, 500, 500);
 		uem = new UserEntityManager(user);
 		shapes = uem.loadShape();
 
@@ -42,7 +42,45 @@ public class Panel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (Paint.color != null && Paint.flag != 0) {
+				if (Paint.flag == 5) {
+					Color color = Paint.color;
+					Point p = new Point(e.getPoint());
+					for(Shape s: shapes) {
+						if(s instanceof Line) {
+							if(s.contains(p)) {
+								repaint();
+								s.setColor(color);
+								try {
+									uem.updateShape(s, color);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+							}
+						} else if(s instanceof Rectangle) {
+							if(s.contains(p)) {
+								repaint();
+								s.setColor(color);
+								try {
+									uem.updateShape(s, color);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+							}
+						} else if(s instanceof Circle) {
+							if(s.contains(p)) {
+								repaint();
+								s.setColor(color);
+								try {
+									uem.updateShape(s, color);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
+							}
+						}
+					}
+				}
+
+				else if (Paint.color != null && Paint.flag != 0) {
 					start = new Point(e.getPoint());
 					end = start;
 					repaint();
@@ -51,7 +89,7 @@ public class Panel extends JPanel {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (Paint.color != null && Paint.flag != 0) {
+				if (Paint.color != null && Paint.flag != 0 && Paint.flag != 5) {
 					if (Paint.flag == 1) {
 						shape = new Rectangle(Paint.color, start, end, user);
 						shapes.add(shape);
@@ -70,11 +108,12 @@ public class Panel extends JPanel {
 					repaint();
 				}
 			}
+
 		});
 	}
 
 	@Override
-	public void paint(Graphics graphics) {
+	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
 

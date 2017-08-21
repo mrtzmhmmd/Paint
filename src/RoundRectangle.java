@@ -15,4 +15,10 @@ public class RoundRectangle extends Shape {
 		g2d.setColor(color);
 		g2d.drawRoundRect(Math.min(start.x, end.x), Math.min(start.y, end.y), Math.abs(start.x-end.x), Math.abs(start.y-end.y), 20, 20);
 	}
+
+	@Override
+	public boolean contains(Point point) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

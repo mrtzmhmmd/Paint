@@ -16,6 +16,10 @@ public abstract class Shape {
 		this.user = user;
 	}
 
+	protected void setColor(Color color) {
+		this.color = color;
+	}
+	
 	protected Color getColor() {
 		return color;
 	}
@@ -32,5 +36,13 @@ public abstract class Shape {
 		return user;
 	}
 
+	protected double distance(Point p1, Point p2) {
+		double dx = Math.pow(p1.getX() - p2.getX(), 2);
+		double dy = Math.pow(p1.getY() - p2.getY(), 2);
+		return Math.sqrt(dx + dy);
+	}
+
 	public abstract void draw(Graphics g);
+
+	public abstract boolean contains(Point point);
 }

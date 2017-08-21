@@ -18,4 +18,12 @@ public class Circle extends Shape {
 		g2d.setColor(color);
 		g2d.drawOval(start.x - radius, start.y - radius, radius * 2, radius * 2);
 	}
+
+	@Override
+	public boolean contains(Point point) {
+		int cx = (int) Math.pow((point.x - start.x), 2);
+		int cy = (int) Math.pow((point.y - start.y), 2);
+		int d = (int) Math.sqrt(cx + cy);
+		return (d == radius || d == radius - 2 || d == radius - 1);
+	}
 }

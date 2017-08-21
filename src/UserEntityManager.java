@@ -125,7 +125,7 @@ public class UserEntityManager {
 			}
 		}
 	}
-	
+
 	private void addRoundRectangle(ArrayList<Shape> shapes) throws SQLException {
 		String query = "SELECT * FROM `hashtest`.`round_rectangle` where `username`= '" + user.getUsername() + "';";
 		Statement stmt = SqlConnection.getConnection().createStatement();
@@ -156,5 +156,23 @@ public class UserEntityManager {
 				shapes.add(new Circle(color, new Point(x1, y1), new Point(x2, y2), user));
 			}
 		}
+	}
+
+	protected void updateShape(Shape shape, Color color) throws SQLException {
+		String query = null;
+		if (shape instanceof Line) {
+			query = "UPDATE `hashtest`.`LINE` SET COLOR= '" + Paint.colorToString(color) + "' WHERE X1="
+					+ shape.getStart().x + " AND Y1=" + shape.getStart().y + " AND X2=" + shape.getEnd().x + " AND y2="
+					+ shape.getEnd().y + " AND USERNAME='" + shape.getUser().getUsername() + "';";
+		} else if (shape instanceof Rectangle) {
+			query = "UPDATE `hashtest`.`RECTANGLE` SET COLOR= '" + Paint.colorToString(color) + "' WHERE X1="
+					+ shape.getStart().x + " AND Y1=" + shape.getStart().y + " AND X2=" + shape.getEnd().x + " AND y2="
+					+ shape.getEnd().y + " AND USERNAME='" + shape.getUser().getUsername() + "';";
+		} else if(shape instanceof Circle) {
+			query = "UPDATE `hashtest`.`CIRCLE` SET COLOR= '" + Paint.colorToString(color) + "' WHERE X1="
+					+ shape.getStart().x + " AND Y1=" + shape.getStart().y + " AND X2=" + shape.getEnd().x + " AND y2="
+					+ shape.getEnd().y + " AND USERNAME='" + shape.getUser().getUsername() + "';";
+		}
+		update(query);
 	}
 }
