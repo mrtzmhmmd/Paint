@@ -19,6 +19,6 @@ public class Line extends Shape {
 
 	@Override
 	public boolean contains(Point point) {
-		return new Line2D.Double(start, end).ptLineDist(point) <= 1;
+		return new Line2D.Double(start, end).ptLineDist(point) <= 0.7;
 	}
 }

@@ -41,6 +41,7 @@ public class Paint {
 		frmPaint.setTitle("Welcome " + user.getName());
 		frmPaint.setBounds(100, 100, 679, 561);
 		frmPaint.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPaint.setLocationRelativeTo(null);
 		frmPaint.getContentPane().setLayout(null);
 
 		Panel panel = new Panel(user);

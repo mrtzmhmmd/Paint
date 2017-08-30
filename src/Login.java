@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class Login {
 
@@ -46,25 +47,22 @@ public class Login {
 	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
-		frmLogin.setBounds(100, 100, 238, 160);
+		frmLogin.setBounds(100, 100, 217, 134);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogin.getContentPane().setLayout(null);
+		frmLogin.setLocationRelativeTo(null);
+		frmLogin.getContentPane().setLayout(new GridLayout(0, 2, 2, 10));
 
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(22, 11, 64, 14);
 		frmLogin.getContentPane().add(lblUsername);
 
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(22, 50, 64, 14);
-		frmLogin.getContentPane().add(lblPassword);
-
 		txtUsername = new JTextField();
-		txtUsername.setBounds(107, 8, 105, 20);
 		frmLogin.getContentPane().add(txtUsername);
 		txtUsername.setColumns(10);
+		
+				JLabel lblPassword = new JLabel("Password");
+				frmLogin.getContentPane().add(lblPassword);
 
 		txtPassword = new JPasswordField();
-		txtPassword.setBounds(107, 47, 105, 20);
 		frmLogin.getContentPane().add(txtPassword);
 
 		JButton btnLogin = new JButton("Login");
@@ -92,17 +90,15 @@ public class Login {
 				}
 			}
 		});
-		btnLogin.setBounds(127, 89, 85, 23);
+		
+				JButton btnRegister = new JButton("Register");
+				btnRegister.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						frmLogin.setVisible(false);
+						Register.enter();
+					}
+				});
+				frmLogin.getContentPane().add(btnRegister);
 		frmLogin.getContentPane().add(btnLogin);
-
-		JButton btnRegister = new JButton("Register");
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmLogin.setVisible(false);
-				Register.enter();
-			}
-		});
-		btnRegister.setBounds(22, 89, 85, 23);
-		frmLogin.getContentPane().add(btnRegister);
 	}
 }
