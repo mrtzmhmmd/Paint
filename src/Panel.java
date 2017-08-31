@@ -129,7 +129,7 @@ public class Panel extends JPanel {
 			shape.draw(graphics);
 
 		if (start != null && end != null) {
-			g2d.setPaint(Color.LIGHT_GRAY);
+			g2d.setPaint(Paint.color);
 			if (Paint.flag == 1) {
 				g2d.draw(drawRectangle());
 			} else if (Paint.flag == 2) {
