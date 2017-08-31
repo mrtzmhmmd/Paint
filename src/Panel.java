@@ -38,6 +38,7 @@ public class Panel extends JPanel {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
+				repaint();
 				if (Paint.color != null && Paint.flag != 0) {
 					end = new Point(e.getPoint());
 					repaint();
@@ -183,13 +184,13 @@ public class Panel extends JPanel {
 	}
 
 	public void zoomIn() {
-		this.zoomFactor = Math.min(2, scale + zoomFactor);
+		Panel.zoomFactor = Math.min(2, scale + zoomFactor);
 		revalidate();
 		repaint();
 	}
 
 	public void zoomOut() {
-		this.zoomFactor = Math.max(1, zoomFactor - scale);
+		Panel.zoomFactor = Math.max(1, zoomFactor - scale);
 		revalidate();
 		repaint();
 	}

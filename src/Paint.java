@@ -39,15 +39,15 @@ public class Paint {
 	private void initialize(User user) throws SQLException {
 		frmPaint = new JFrame();
 		frmPaint.setTitle("Welcome " + user.getName());
-		frmPaint.setBounds(100, 100, 679, 561);
+		frmPaint.setBounds(100, 100, 679, 570);
 		frmPaint.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPaint.setLocationRelativeTo(null);
 		frmPaint.getContentPane().setLayout(null);
-		
+
 		JPanel jPanel = new JPanel();
-		jPanel.setBounds(10, 10, 500, 500);
+		jPanel.setBounds(10, 10, 510, 510);
 		frmPaint.getContentPane().add(jPanel);
-		
+
 		Panel panel = new Panel(user);
 		JScrollPane scroll = new JScrollPane(panel);
 		jPanel.add(scroll);
@@ -56,6 +56,7 @@ public class Paint {
 		btnRectangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				flag = 1;
+				Panel.zoomFactor = 1;
 			}
 		});
 		btnRectangle.setBounds(520, 11, 135, 23);
@@ -65,6 +66,7 @@ public class Paint {
 		btnCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				flag = 2;
+				Panel.zoomFactor = 1;
 			}
 		});
 		btnCircle.setBounds(520, 45, 135, 23);
@@ -74,6 +76,7 @@ public class Paint {
 		btnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				flag = 3;
+				Panel.zoomFactor = 1;
 			}
 		});
 		btnLine.setBounds(520, 79, 135, 23);
@@ -162,6 +165,14 @@ public class Paint {
 		});
 		btnSelectShape.setBounds(520, 382, 135, 23);
 		frmPaint.getContentPane().add(btnSelectShape);
+
+		JButton btnSaveAsImage = new JButton("Save as Image");
+		btnSaveAsImage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSaveAsImage.setBounds(520, 450, 135, 23);
+		frmPaint.getContentPane().add(btnSaveAsImage);
 
 		class VoteActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent ex) {

@@ -50,6 +50,7 @@ public class Register {
 	 */
 	private void initialize() {
 		frmRegister = new JFrame();
+		frmRegister.setResizable(false);
 		frmRegister.setTitle("Register Form");
 		frmRegister.setBounds(100, 100, 273, 256);
 		frmRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
