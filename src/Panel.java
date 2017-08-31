@@ -26,7 +26,7 @@ public class Panel extends JPanel {
 	private Point start, end;
 	private Shape shape = null;
 	private double scale = 0.2;
-	private double zoomFactor = 1;
+	protected static double zoomFactor = 1;
 
 	Panel(User user) throws SQLException {
 		setBounds(0, 0, 500, 500);
