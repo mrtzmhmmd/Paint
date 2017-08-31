@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -24,9 +25,13 @@ public class Panel extends JPanel {
 	private UserEntityManager uem;
 	private Point start, end;
 	private Shape shape = null;
+	private double scale = 0.2;
+	private double zoomFactor = 1;
 
 	Panel(User user) throws SQLException {
-		setBounds(10, 10, 500, 500);
+		setBounds(0, 0, 500, 500);
+		setBackground(Color.WHITE);
+
 		uem = new UserEntityManager(user);
 		shapes = uem.loadShape();
 
@@ -45,9 +50,9 @@ public class Panel extends JPanel {
 				if (Paint.flag == 5) {
 					Color color = Paint.color;
 					Point p = new Point(e.getPoint());
-					for(Shape s: shapes) {
-						if(s instanceof Line) {
-							if(s.contains(p)) {
+					for (Shape s : shapes) {
+						if (s instanceof Line) {
+							if (s.contains(p)) {
 								repaint();
 								s.setColor(color);
 								try {
@@ -56,8 +61,8 @@ public class Panel extends JPanel {
 									e1.printStackTrace();
 								}
 							}
-						} else if(s instanceof Rectangle) {
-							if(s.contains(p)) {
+						} else if (s instanceof Rectangle) {
+							if (s.contains(p)) {
 								repaint();
 								s.setColor(color);
 								try {
@@ -66,8 +71,8 @@ public class Panel extends JPanel {
 									e1.printStackTrace();
 								}
 							}
-						} else if(s instanceof Circle) {
-							if(s.contains(p)) {
+						} else if (s instanceof Circle) {
+							if (s.contains(p)) {
 								repaint();
 								s.setColor(color);
 								try {
@@ -108,7 +113,6 @@ public class Panel extends JPanel {
 					repaint();
 				}
 			}
-
 		});
 	}
 
@@ -116,12 +120,13 @@ public class Panel extends JPanel {
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		Graphics2D g2d = (Graphics2D) graphics;
-
+		g2d.scale(zoomFactor, zoomFactor);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
 		for (Shape shape : shapes)
 			shape.draw(graphics);
+
 		if (start != null && end != null) {
 			g2d.setPaint(Color.LIGHT_GRAY);
 			if (Paint.flag == 1) {
@@ -170,5 +175,22 @@ public class Panel extends JPanel {
 		for (Shape shape : shapes) {
 			uem.saveShape(shape);
 		}
+	}
+
+	
+	public Dimension getPreferredSize() {
+		return new Dimension((int) (500 * zoomFactor), (int) (500 * zoomFactor));
+	}
+
+	public void zoomIn() {
+		this.zoomFactor = Math.min(2, scale + zoomFactor);
+		revalidate();
+		repaint();
+	}
+
+	public void zoomOut() {
+		this.zoomFactor = Math.max(1, zoomFactor - scale);
+		revalidate();
+		repaint();
 	}
 }

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
 public class Register {
 
@@ -19,6 +20,7 @@ public class Register {
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 	private JPasswordField txtRetypePassword;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -129,6 +131,9 @@ public class Register {
 				txtRetypePassword.setText("");
 			}
 		});
+		
+		panel = new JPanel();
+		frmRegister.getContentPane().add(panel);
 		btnRegister.setBounds(131, 182, 89, 23);
 		frmRegister.getContentPane().add(btnRegister);
 	}

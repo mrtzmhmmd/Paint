@@ -58,9 +58,9 @@ public class Login {
 		txtUsername = new JTextField();
 		frmLogin.getContentPane().add(txtUsername);
 		txtUsername.setColumns(10);
-		
-				JLabel lblPassword = new JLabel("Password");
-				frmLogin.getContentPane().add(lblPassword);
+
+		JLabel lblPassword = new JLabel("Password");
+		frmLogin.getContentPane().add(lblPassword);
 
 		txtPassword = new JPasswordField();
 		frmLogin.getContentPane().add(txtPassword);
@@ -90,15 +90,14 @@ public class Login {
 				}
 			}
 		});
-		
-				JButton btnRegister = new JButton("Register");
-				btnRegister.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						frmLogin.setVisible(false);
-						Register.enter();
-					}
-				});
-				frmLogin.getContentPane().add(btnRegister);
+		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmLogin.setVisible(false);
+				Register.enter();
+			}
+		});
+		frmLogin.getContentPane().add(btnRegister);
 		frmLogin.getContentPane().add(btnLogin);
 	}
 }

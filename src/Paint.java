@@ -2,10 +2,11 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
+import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -17,7 +18,6 @@ public class Paint {
 	private ButtonGroup btnGroup;
 	protected static Color color = null;
 	protected static int flag = 0;
-	protected static double factor = 1;
 
 	public static void enter(User user) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,10 +43,14 @@ public class Paint {
 		frmPaint.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPaint.setLocationRelativeTo(null);
 		frmPaint.getContentPane().setLayout(null);
-
+		
+		JPanel jPanel = new JPanel();
+		jPanel.setBounds(10, 10, 500, 500);
+		frmPaint.getContentPane().add(jPanel);
+		
 		Panel panel = new Panel(user);
-		panel.setBackground(Color.WHITE);
-		frmPaint.getContentPane().add(panel);
+		JScrollPane scroll = new JScrollPane(panel);
+		jPanel.add(scroll);
 
 		JButton btnRectangle = new JButton("Rectangle");
 		btnRectangle.addActionListener(new ActionListener() {
@@ -119,7 +123,7 @@ public class Paint {
 		JButton btnZoomIn = new JButton("Zoom in");
 		btnZoomIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				factor++;
+				panel.zoomIn();
 			}
 		});
 		btnZoomIn.setBounds(520, 314, 135, 23);
@@ -128,7 +132,7 @@ public class Paint {
 		JButton btnZoomOut = new JButton("Zoom out");
 		btnZoomOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				factor--;
+				panel.zoomOut();
 			}
 		});
 		btnZoomOut.setBounds(520, 348, 135, 23);
